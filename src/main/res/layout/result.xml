@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip">
+
+    <ImageView
+        android:id="@+id/avatar_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/author_name_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/avatar_id"
+        android:layout_above="@+id/title_id"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Description"
+        style="@style/SideTextStyle" />
+
+    <TextView
+        android:id="@+id/answers_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/title_id"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Example application"
+        style="@style/SideTextStyle" />
+
+    <TextView
+        android:id="@+id/title_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/avatar_id"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text="Example applicatition 1111111111111111"
+        style="@style/MainTextStyle" />
+
+</RelativeLayout>
