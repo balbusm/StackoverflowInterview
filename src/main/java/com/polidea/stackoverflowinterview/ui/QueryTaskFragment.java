@@ -32,8 +32,9 @@ public class QueryTaskFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         ((Injector) getActivity().getApplication()).inject(this);
-
-        executeQueryTask();
+        if (savedInstanceState == null) {
+            executeQueryTask();
+        }
     }
 
     public void executeQueryTask() {
@@ -46,7 +47,6 @@ public class QueryTaskFragment extends Fragment {
         }
 
     }
-
 
     @Override
     public void onDetach() {

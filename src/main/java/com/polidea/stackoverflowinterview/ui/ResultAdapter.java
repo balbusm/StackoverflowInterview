@@ -1,6 +1,7 @@
 package com.polidea.stackoverflowinterview.ui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +71,19 @@ public class ResultAdapter extends BaseAdapter {
 
     private void fillView(ViewHolder viewHolder, Summary summary) {
         final Owner owner = summary.getOwner();
-        viewHolder.avatarView.setImageBitmap(owner.getProfileImage());
+        setImage(viewHolder.avatarView, owner.getProfileImage());
         viewHolder.authorNameView.setText(owner.getDisplayName());
         viewHolder.titleView.setText(summary.getTitle());
         viewHolder.answersView.setText(Integer.toString(summary.getAnswersCount()));
 
+    }
+
+    private void setImage(ImageView imageVIew, Bitmap bitmap) {
+        if (bitmap == null) {
+            imageVIew.setImageResource(R.drawable.ic_launcher);
+        } else {
+            imageVIew.setImageBitmap(bitmap);
+        }
     }
 
     private static class ViewHolder {

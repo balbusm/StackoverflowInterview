@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Holds arguments for http request
+ */
 public class QueryArgument implements Parcelable {
     public static final Parcelable.Creator<QueryArgument> CREATOR
             = new Parcelable.Creator<QueryArgument>() {
@@ -54,6 +57,11 @@ public class QueryArgument implements Parcelable {
 
     public String getIntitle() {
         return intitle;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[intitle=%s order=%s sort=%s]", intitle, order, sort);
     }
 
     public enum Order {

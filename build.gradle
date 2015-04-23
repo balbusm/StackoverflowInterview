@@ -4,8 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.3'
-        classpath 'org.robolectric:robolectric-gradle-plugin:1.0.1'
+        classpath 'com.android.tools.build:gradle:1.1.+'
     }
 }
 
@@ -18,10 +17,9 @@ task wrapper(type: Wrapper) {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'org.robolectric'
 
 android {
-    compileSdkVersion 17
+    compileSdkVersion 18
     buildToolsVersion "22.0.1"
 
     packagingOptions {
@@ -29,7 +27,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.polideal.stackoverflowinterview"
+        applicationId "com.polidea.stackoverflowinterview"
         minSdkVersion 17
         targetSdkVersion 18
         versionCode 1
@@ -37,6 +35,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
 }
 
 dependencies {
@@ -47,9 +46,11 @@ dependencies {
     provided 'com.squareup.dagger:dagger-compiler:1.2.+'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:2.4'
     testCompile 'org.mockito:mockito-core:1.9.5'
-
+    testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
+    testCompile('org.robolectric:robolectric:2.4') {
+        exclude module: 'commons-logging'
+    }
 
     androidTestCompile 'org.mockito:mockito-core:1.10.19'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'

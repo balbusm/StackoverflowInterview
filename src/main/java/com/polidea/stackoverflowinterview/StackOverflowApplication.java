@@ -20,6 +20,7 @@ public class StackOverflowApplication extends Application implements ModifiableI
         };
     }
 
+    @Override
     public void modifyInjector(Object... modules) {
         graph = ObjectGraph.create(modules);
     }

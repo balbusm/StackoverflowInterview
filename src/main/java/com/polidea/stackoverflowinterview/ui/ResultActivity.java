@@ -18,6 +18,7 @@ import com.polidea.stackoverflowinterview.R;
 import com.polidea.stackoverflowinterview.domain.Summary;
 import com.polidea.stackoverflowinterview.search.QueryResult;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.polidea.stackoverflowinterview.search.QueryResult.ErrorCode;
@@ -37,8 +38,10 @@ public class ResultActivity extends Activity implements QueryTaskFragment.QueryT
     }
 
     private static final String QUERY_TASK_TAG = "QUERY_TASK_TAG";
+    private static final String QUERY_RESULT = "QUERY_RESULT";
 
     private QueryTaskFragment mQueryTaskFragment;
+    private QueryResult mQueryResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,19 +70,30 @@ public class ResultActivity extends Activity implements QueryTaskFragment.QueryT
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(QUERY_RESULT, mQueryResult);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        QueryResult result = (QueryResult)savedInstanceState.getParcelable(QUERY_RESULT);
+        updateStateWith(result);
+    }
+
+    @Override
     public void onPreExecute() {
-        setContentView(R.layout.loading);
+        updateStateWith(null);
     }
 
     @Override
     public void onPostExecute(QueryResult queryResult) {
-        if (!checkErroCode(queryResult)) {
-            prepareListView(queryResult);
-        }
+        updateStateWith(queryResult);
     }
 
-    private void prepareListView(QueryResult queryResult) {
-        final ResultAdapter resultAdapter = new ResultAdapter(this, queryResult.getSummaryList());
+    private void updateLayoutWith(List<Summary> summaryList) {
+        final ResultAdapter resultAdapter = new ResultAdapter(this, summaryList);
         setContentView(R.layout.list);
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(resultAdapter);
@@ -95,16 +109,27 @@ public class ResultActivity extends Activity implements QueryTaskFragment.QueryT
         });
     }
 
-    private boolean checkErroCode(QueryResult queryResult) {
+    private void updateStateWith(QueryResult queryResult) {
+        mQueryResult = queryResult;
+        if (queryResult == null) {
+            updateLayoutWithLoading();
+            return;
+        }
         boolean hasError = queryResult.hasError();
         if (hasError) {
-            final Integer stringResId = ERROR_CODE_TO_STRING_RES.get(queryResult.getErrorCode());
-            showError(stringResId);
+            updateLayoutWith(queryResult.getErrorCode());
+        } else {
+            updateLayoutWith(queryResult.getSummaryList());
         }
-        return hasError;
     }
 
-    private void showError(int stringResId) {
+    private void updateLayoutWithLoading() {
+        setContentView(R.layout.loading);
+    }
+
+    private void updateLayoutWith(ErrorCode code) {
+        setContentView(R.layout.loading);
+        final Integer stringResId = ERROR_CODE_TO_STRING_RES.get(code);
         final TextView textView = (TextView) findViewById(R.id.textId);
         textView.setText(stringResId);
     }

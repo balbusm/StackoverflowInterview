@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="70dip"
+    android:minHeight="70dip"
     android:padding="6dip">
 
     <ImageView
         android:id="@+id/avatar_id"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="6dip"
-        android:contentDescription="TODO"
-        android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/author_name_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/avatar_id"
-        android:layout_above="@+id/title_id"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:text="Description"
-        style="@style/SideTextStyle" />
-
-    <TextView
-        android:id="@+id/answers_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/title_id"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="Example application"
-        style="@style/SideTextStyle" />
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/title_id"
+        style="@style/MainTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_panel_id"
+        android:layout_toRightOf="@+id/avatar_id"
+        android:gravity="center"/>
+
+    <RelativeLayout
+        android:id="@+id/top_panel_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/avatar_id"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:text="Example applicatition 1111111111111111"
-        style="@style/MainTextStyle" />
+        android:layout_toRightOf="@id/avatar_id"
+        android:layout_margin="3dip">
+
+        <TextView
+            android:id="@+id/author_name_id"
+            style="@style/SideTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/answers_id"
+            android:layout_alignParentLeft="true"
+            android:singleLine="true"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/answers_id"
+            style="@style/SideTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
